@@ -72,6 +72,45 @@ void mark_path(int i, int j)
 
 }
 
+void shortest_path(int i, int j, int destination)
+{
+  while(flag = 0)
+  {
+    if((graph[i-1][j] != "X")&&(graph[i+1][j] != "X")&&(graph[i][j+1] != "X")&&(graph[i][j-1] != "X"))   //+ formation
+    {
+      if(graph[i-1][j]!= destination)
+      {
+        graph[i-2][j] += graph[i-1][j];
+      }
+      else
+      {
+        flag = 1;
+      }
+      if(graph[i+1][j]!= destination)
+      {
+        graph[i+2][j] += graph[i+1][j];
+      }
+      else
+      {
+        flag =1;
+      }
+      if(graph[i][j-1]!= destination)
+      {
+        graph[i][j-2] += graph[i][j-1];
+      }
+      else
+      {
+        flag =1;
+      }
+      if(graph[i][j+1]!= destination)
+      {
+        graph[i][j+2] += graph[i][j+1];
+      }
+    }
+    else if()
+  }
+}
+
 void plot_graph()
 {
             if(node!=0)//node
