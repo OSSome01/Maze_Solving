@@ -172,6 +172,7 @@ void plot_graph()
                         j--;
                         graph[i][j]=distance;
                         j--;
+                        graph[i+1][j]="Z";
                         if(graph[i][j]="X")
                             graph[i][j]="T";
                         else
@@ -182,6 +183,7 @@ void plot_graph()
                       i++;
                       graph[i][j]=distance;
                       i++;
+                      graph[i][j+1]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="T";
                       else
@@ -192,6 +194,7 @@ void plot_graph()
                       j++;
                       graph[i][j]=distance;
                       j++;
+                      graph[i-1][j]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="T";
                       else
@@ -202,6 +205,7 @@ void plot_graph()
                       i--;
                       graph[i][j]=distance;
                       i--;
+                      graph[i][j-1]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="T";
                       else
@@ -217,6 +221,7 @@ void plot_graph()
                       j--;
                       graph[i][j]=distance;
                       j--;
+                      graph[i+1][j]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="|-";
                       else
@@ -227,6 +232,7 @@ void plot_graph()
                       i++;
                       graph[i][j]=distance;
                       i++;
+                      graph[i][j+1]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="|-";
                       else
@@ -237,6 +243,7 @@ void plot_graph()
                       j++;
                       graph[i][j]=distance;
                       j++;
+                      graph[i-1][j]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="|-";
                       else
@@ -247,6 +254,7 @@ void plot_graph()
                       i--;
                       graph[i][j]=distance;
                       i--;
+                      graph[i][j-1]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="|-";
                       else
@@ -261,6 +269,8 @@ void plot_graph()
                       j--;
                       graph[i][j]=distance;
                       j--;
+                      graph[i][j-1]="Z";
+                      graph[i+1][j]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="+";
                       else
@@ -271,6 +281,8 @@ void plot_graph()
                       i++;
                       graph[i][j]=distance;
                       i++;
+                      graph[i+1][j]="Z";
+                      graph[i][j+1]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="+";
                       else
@@ -281,6 +293,8 @@ void plot_graph()
                       j++;
                       graph[i][j]=distance;
                       j++;
+                      graph[i-1][j]="Z";
+                      graph[i][j+1]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="+";
                       else
@@ -291,6 +305,8 @@ void plot_graph()
                       i--;
                       graph[i][j]=distance;
                       i--;
+                      graph[i-1][j]="Z";
+                      graph[i][j-1]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="+";
                       else
@@ -305,6 +321,7 @@ void plot_graph()
                       j--;
                       graph[i][j]=distance;
                       j--;
+                      graph[i][j-1]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="-|";
                       else
@@ -315,6 +332,7 @@ void plot_graph()
                       i++;
                       graph[i][j]=distance;
                       i++;
+                      graph[i+1][j]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="-|";
                       else
@@ -325,6 +343,7 @@ void plot_graph()
                       j++;
                       graph[i][j]=distance;
                       j++;
+                      graph[i][j+1]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="-|";
                       else
@@ -335,6 +354,7 @@ void plot_graph()
                       i--;
                       graph[i][j]=distance;
                       i--;
+                      graph[i-1][j]="Z";
                       if(graph[i][j]="X")
                           graph[i][j]="-|";
                       else
