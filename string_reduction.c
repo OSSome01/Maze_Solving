@@ -14,12 +14,10 @@ RUS - L
 SUL - R
 SUR - L
 SUS - U
-
 LRRRL - R
 SRRRS - L
 RLLLR - L
 SLLLS - R
-
 */
 
 
@@ -31,7 +29,13 @@ int main()
   int len = sizeof(a);
     for(int i=0; i<len; i++)
     {
-      if(a[i+1]=='U')
+
+      printf("i: %i\n", i);
+      if(a[i]=='X')
+      {
+        break;
+      }
+      else if(a[i+1]=='U')
       {
         count += 2;
         if(a[i]=='L')
@@ -89,8 +93,9 @@ int main()
           a[l] = 'X';
         }
         printf("%d\n", count );
-        printf("%d\ni is : ",i);
+        //printf("%d\ni is : ",i);
         printf("\n");
+        i--;
       }
       else if((a[i+1]==a[i+2])&&(a[i+2]==a[i+3])&&(a[i]==a[i+4])&&(a[i]!='X'))
       {
@@ -122,6 +127,7 @@ int main()
           a[l] = 'X';
         }
         printf("%d\n", count);
+        i--;
       }
       printf("%s\n", a);
 
@@ -139,12 +145,3 @@ int main()
     printf("%s\n",final);
 
 }
-
-/*a[i+1]='X';
-a[i+2]='X';
-for(int j=i;j<8;i++)
-{
-  int temp = a[j+1];
-  a[j+1] = a[j+3];
-  a[j+3] = temp;
-}*/
