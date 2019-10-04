@@ -142,14 +142,14 @@ void nodecheck()
         }
         if(fx==0)
         {
-          string[v]='U';
-          v++;
+          string[v]='E';
+          //v++;
           bot_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
           vTaskDelay( 10000 / portTICK_PERIOD_MS );
         }
         read_sensors();
         calc_sensor_values();
-        if(sensor_value[1]<150 && sensor_value[2]<150)
+        else if(sensor_value[1]<150 && sensor_value[2]<150)
         {
           string[v]='L';
           v++;
@@ -246,6 +246,7 @@ void line_follow_task(void *arg)
 
     calc_sensor_values();
     calculate_error();
+    
     calculate_correction();
     left_pwm = constrain((opt - correction), lower_pwm_constrain, higher_pwm_constrain);
     right_pwm = constrain((opt + correction), lower_pwm_constrain, higher_pwm_constrain);
