@@ -21,9 +21,9 @@ int weights[4] = {3,1,-1,-3};
 /*
  * Motor value constraints
  */
-float opt = 75;
-float lower_pwm_constrain = 65;
-float higher_pwm_constrain = 85;
+float opt = 80;
+float lower_pwm_constrain = 70;
+float higher_pwm_constrain = 90;
 float left_pwm = 0, right_pwm = 0;
 int x,y,fx,node;
 
@@ -134,7 +134,7 @@ void nodecheck()
         read_sensors();
         while(1)
         {
-        bot_forward(MCPWM_UNIT_0, MCPWM_TIMER_0,65,65);
+        bot_forward(MCPWM_UNIT_0, MCPWM_TIMER_0,70,70);
         extra_sensors();
         read_sensors();
         if(x==0)
@@ -147,8 +147,8 @@ void nodecheck()
           bot_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
           vTaskDelay( 10000 / portTICK_PERIOD_MS );
         }
-        read_sensors();
-        calc_sensor_values();
+        //read_sensors();
+        //calc_sensor_values();
         else if(sensor_value[1]<150 && sensor_value[2]<150)
         {
           string[v]='L';
@@ -219,7 +219,7 @@ void nodecheck()
             }
 
         }
-        else if(x==1&&y==1&&fx==1&&sensor_value[1]<150&&sensor_value[2]<150)
+        else if(x==1&&y==1&&fx==1&&sensor_value[1]<150&&sensor_value[2]<150&&sensor_value[0]<150&&sensor_value[3]<150)
         {
           string[v] = 'U';
           v++;
@@ -246,7 +246,7 @@ void line_follow_task(void *arg)
 
     calc_sensor_values();
     calculate_error();
-    
+
     calculate_correction();
     left_pwm = constrain((opt - correction), lower_pwm_constrain, higher_pwm_constrain);
     right_pwm = constrain((opt + correction), lower_pwm_constrain, higher_pwm_constrain);
