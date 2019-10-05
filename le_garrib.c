@@ -21,9 +21,10 @@ int weights[4] = {3,1,-1,-3};
 /*
  * Motor value constraints
  */
-float opt = 80;
-float lower_pwm_constrain = 70;
-float higher_pwm_constrain = 90;
+
+float opt = 75;
+float lower_pwm_constrain = 65;
+float higher_pwm_constrain = 85;
 float left_pwm = 0, right_pwm = 0;
 int x,y,fx,node;
 
@@ -134,11 +135,23 @@ void nodecheck()
         read_sensors();
         while(1)
         {
-        bot_forward(MCPWM_UNIT_0, MCPWM_TIMER_0,70,70);
-        extra_sensors();
-        read_sensors();
-        if(x==0)
+          // read_sensors();
+          // calc_sensor_values();
+          // calculate_error();
+          // calculate_correction();
+          // extra_sensors();
+          // left_pwm = constrain((opt - correction), lower_pwm_constrain, higher_pwm_constrain);
+          // right_pwm = constrain((opt + correction), lower_pwm_constrain, higher_pwm_constrain);
+          bot_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, 75, 75);
+
+        // read_sensors();
+          extra_sensors();
+          if(x==0)
+          {
+            //bot_stop(MCPWM_UNIT_0, MCPWM_TIMER_0);
+            //vTaskDelay( 1000 / portTICK_PERIOD_MS );
             break;
+          }
         }
         if(fx==0)
         {
@@ -158,12 +171,12 @@ void nodecheck()
             bot_spot_left(MCPWM_UNIT_0, MCPWM_TIMER_0, 70, 70);
             read_sensors();
             calc_sensor_values();
-            if(sensor_value[1]>150&&sensor_value[2]>150)
+            if(sensor_value[1]>150)//&&sensor_value[2]>150)
               break;
             }
 
         }
-        else if(sensor_value[1]>150 && sensor_value[2]>150)
+        else if(sensor_value[1]>150 || sensor_value[2]>150)
         {
           string[v]='L';
           v++;
@@ -172,15 +185,16 @@ void nodecheck()
                     bot_spot_left(MCPWM_UNIT_0, MCPWM_TIMER_0, 70, 70);
                     read_sensors();
                     calc_sensor_values();
-                    if(sensor_value[1]<150 )
+                    if(sensor_value[2]<150)// && sensor_value[2]<150 && sensor_value[0]<150 && sensor_value[3]<150)
                         break;
+
                 }
             while(1)
                 {
-                    bot_spot_left(MCPWM_UNIT_0, MCPWM_TIMER_0, 80, 80);
+                    bot_spot_left(MCPWM_UNIT_0, MCPWM_TIMER_0, 70, 70);
                     read_sensors();
                     calc_sensor_values();
-                    if(sensor_value[1]>150 && sensor_value[2]>150)
+                    if(sensor_value[1]>150)// && sensor_value[2]>150)
                         break;
                 }
 
@@ -198,7 +212,13 @@ void nodecheck()
                 v++;
                 while(1)
                 {
-                    bot_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, 70, 70);
+                  // read_sensors();
+                  // calc_sensor_values();
+                  // calculate_error();
+                  // calculate_correction();
+                  // left_pwm = constrain((opt - correction), lower_pwm_constrain, higher_pwm_constrain);
+                  // right_pwm = constrain((opt + correction), lower_pwm_constrain, higher_pwm_constrain);
+                  bot_forward(MCPWM_UNIT_0, MCPWM_TIMER_0, 70, 70);
                     extra_sensors();
                     if(x==1 && y==1)
                         break;
@@ -210,10 +230,10 @@ void nodecheck()
                 v++;
                 while(1)
                 {
-                    bot_spot_right(MCPWM_UNIT_0, MCPWM_TIMER_0, 80, 80);
+                    bot_spot_right(MCPWM_UNIT_0, MCPWM_TIMER_0, 70, 70);
                     read_sensors();
                     calc_sensor_values();
-                    if(sensor_value[1]>150 && sensor_value[2]>150)
+                    if(sensor_value[1]>150)// && sensor_value[2]>150)
                         break;
                 }
             }
@@ -225,10 +245,10 @@ void nodecheck()
           v++;
           while(1)
           {
-            bot_spot_right(MCPWM_UNIT_0, MCPWM_TIMER_0, 80, 80);
+            bot_spot_right(MCPWM_UNIT_0, MCPWM_TIMER_0, 70, 70);
             read_sensors();
             calc_sensor_values();
-            if(sensor_value[1]>150 && sensor_value[2]>150)
+            if(sensor_value[1]>150)// && sensor_value[2]>150)
                 break;
           }
         }
@@ -243,10 +263,8 @@ void line_follow_task(void *arg)
   while(1)
   {
     read_sensors();
-
     calc_sensor_values();
     calculate_error();
-
     calculate_correction();
     left_pwm = constrain((opt - correction), lower_pwm_constrain, higher_pwm_constrain);
     right_pwm = constrain((opt + correction), lower_pwm_constrain, higher_pwm_constrain);
